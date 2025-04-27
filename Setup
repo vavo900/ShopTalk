@@ -1,0 +1,17 @@
+# 1. clone & create env
+conda create -n shoptalk python=3.10 -y && conda activate shoptalk
+pip install -r requirements.txt
+
+# 2. preprocess & embed
+python -m app.data_prep          # cleans data → data/processed/
+python -m app.fine_tune          # optional: LoRA fine-tuning
+python -m app.ingest             # builds Chroma DB
+
+# 3. run the backend
+uvicorn app.api:app --host 0.0.0.0 --port 8000
+
+# 4. in another shell start the UI
+streamlit run app/ui_streamlit.py
+
+docker build -t shoptalk:latest .
+docker run -p 8000:8000 -p 8501:8501 shoptalk:latest
