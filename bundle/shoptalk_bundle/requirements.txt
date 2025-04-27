@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+streamlit
+langchain
+chromadb
+sentence-transformers
+peft
+transformers
+torch
+pandas
+scikit-learn
+smart_open[s3]
+tqdm
+python-dotenv
